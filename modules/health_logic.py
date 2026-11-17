@@ -17,14 +17,12 @@
 • Delete (삭제): 데이터를 지우는 기능 (SQL: DELETE)
 
 클래스
-- ExcelRepository: UI 및 엑셀 파일로부터 데이터를 받아 중복 검사 후 신규 등록 미
+- ExcelRepository: UI 및 엑셀 파일로부터 데이터를 받아 중복 검사 후 신규 등록 및 중복 체크
+- HealthLogic:  HealthManager을 상속받아 건강 기록의 등록, 검색, 수정, 삭제, 통계
 '''
-# 엑셀파일 읽기 및 저장
+
 class ExcelRepository:
 
 
-# 조회 및 검색
-
-# 수정 및 BMI 자동 재계산, 삭제
-
-# 통계 산출
+class HealthLogic:
+    
