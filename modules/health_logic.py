@@ -20,8 +20,26 @@
 - ExcelRepository: UI 및 엑셀 파일로부터 데이터를 받아 중복 검사 후 신규 등록 및 중복 체크
 - HealthLogic:  HealthManager을 상속받아 건강 기록의 등록, 검색, 수정, 삭제, 통계
 '''
+from modules.health_db import HealthManager, HealthRecord
+import csv # 파일을 읽기 위해 불러옴
 
 class ExcelRepository:
+    # 엑셀 파일을 읽어 건강 기록 목록과 오류 정보를 반환
+    def load_records(self, file_path):
+        self.file_path = file_path
+        with open('health_data','r', encoding='utf-8') as f:
+            reader = csv.reader(f)
+            
+    # 기록을 검증하고 중복이 아니면 목록에 추가
+    def add_record(self, record, records):
+        self.recode = recode
+        self.recodes = recodes
+        
+        
+    # 건강 기록 목록을 엑셀 파일에 저장
+    def save_records(self, file_path, records):
+        
+
 
 
 class HealthLogic:

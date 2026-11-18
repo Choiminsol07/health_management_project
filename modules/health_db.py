@@ -17,6 +17,7 @@
 import json  # json : 데이터를 키와 값의 쌍으로 구성하여 저장하는 파일 형식
 import csv  # csv : 데이터를 ,로 구분하여 저장하는 파일 형식
 import pickle  # pickle : 파이썬 객체를 직렬화하여 저장하는 파일 형식
+from datetime import datetime # 식별번호를 위하여 해당 년도 불러오기
 
 # 건강정보 클래스 구현
 class HealthRecord:
@@ -52,15 +53,16 @@ class HealthRecord:
 
 class HealthManager:
 
-    # 사용자 식별번호 생성
+    # 사용자 식별번호 생성 + 년도 불러오기
+
     def __init__(self):
         self.records = []
         self.next_number = 1
 
     def generate_id(self):
-        patient_id = f"P2026-{self.next_number:04d}"
+        year = datetime.now().year
+        patient_id = f"P{year}-{self.next_number:04d}"
         self.next_number += 1
-
         return patient_id
 
     # 여러 사람의 건강 정보 추가하기
