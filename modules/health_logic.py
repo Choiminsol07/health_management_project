@@ -1,4 +1,5 @@
-''' 
+
+'''
 202611845 최민솔
 
 모듈2 주 기능
@@ -10,41 +11,17 @@
 - 핵심 비즈니스 로직 및 CRUD, 통계 연산, 건강정보관리자 클래스 내 메소드 추가, 콘솔 APP으로 테스트
 
 
--CRUD: 컴퓨터 소프트웨어와 데이터베이스에서 데이터를 처리하는 가장 기본적인 4가지 기능의 앞자리를 딴 용어
-• Create (생성): 새로운 데이터를 만드는 기능 (SQL: INSERT)
-• Read (읽기/조회): 저장된 데이터를 확인하는 기능 (SQL: SELECT)
-• Update (수정/갱신): 기존 데이터를 변경하는 기능 (SQL: UPDATE)
-• Delete (삭제): 데이터를 지우는 기능 (SQL: DELETE)
+CRUD
+- Create (생성): 새로운 데이터를 만드는 기능
+- Read (읽기/조회): 저장된 데이터를 확인하는 기능
+- Update (수정/갱신): 기존 데이터를 변경하는 기능
+- Delete (삭제): 데이터를 지우는 기능
+
 
 클래스
-- ExcelRepository: UI 및 엑셀 파일로부터 데이터를 받아 중복 검사 후 신규 등록 및 중복 체크
-- HealthLogic:  HealthManager을 상속받아 건강 기록의 등록, 검색, 수정, 삭제, 통계
+- ExcelRepository: CSV 파일 읽기, 저장, 중복 검사
+- HealthLogic: HealthManager를 상속받아 건강 기록의 등록, 검색, 수정, 삭제, 통계
 '''
-from modules.health_db import HealthManager, HealthRecord
-import csv # 파일을 읽기 위해 불러옴
-
-class ExcelRepository:
-    # 엑셀 파일을 읽어 건강 기록 목록과 오류 정보를 반환
-    def load_records(self, file_path):
-        self.file_path = file_path
-        with open('health_data','r', encoding='utf-8') as f:
-            reader = csv.reader(f)
-            
-    # 기록을 검증하고 중복이 아니면 목록에 추가
-    def add_record(self, record, records):
-        self.recode = recode
-        self.recodes = recodes
-        
-        
-    # 건강 기록 목록을 엑셀 파일에 저장
-    def save_records(self, file_path, records):
-        
-
-
-
-class HealthLogic:
-
-    
 
 from modules.health_db import HealthManager, HealthRecord
 import csv
@@ -54,6 +31,7 @@ class ExcelRepository:
 
     # CSV 파일 읽기
     def load_records(self, file_path):
+
         records = []
 
         try:
@@ -76,15 +54,17 @@ class ExcelRepository:
     def add_record(self, record, records):
 
         for existing in records:
+
             if existing.id == record.id:
                 print("중복된 식별번호입니다.")
                 return False
 
         records.append(record)
+
         return True
 
 
-    # CSV 파일 저장
+    # 건강 기록 목록을 CSV 파일에 저장
     def save_records(self, file_path, records):
 
         try:
@@ -98,6 +78,7 @@ class ExcelRepository:
                 ])
 
                 for record in records:
+
                     writer.writerow([
                         record.id,
                         record.name,
@@ -119,9 +100,8 @@ class HealthLogic(HealthManager):
     def calculate_bmi(self, height, weight):
 
         bmi = weight / (height / 100) ** 2
-        bmi = round(bmi, 2)
 
-        return bmi
+        return round(bmi, 2)
 
 
     # 비만도 판정
@@ -145,18 +125,23 @@ class HealthLogic(HealthManager):
 
         # 중복 이름 검사
         for record in self.records:
+
             if record.name == name and record.birth_year == birth_year:
                 print("이미 등록된 사람입니다.")
                 return False
 
+
         # 식별번호 생성
         patient_id = self.generate_id()
+
 
         # BMI 계산
         bmi = self.calculate_bmi(height, weight)
 
+
         # 비만도 계산
         status = self.calculate_status(bmi)
+
 
         # 건강 기록 객체 생성
         new_record = HealthRecord(
@@ -170,10 +155,12 @@ class HealthLogic(HealthManager):
             status
         )
 
+
         # 기록 추가
         self.add_record(new_record)
 
         print("등록 완료!")
+
         return new_record
 
 
@@ -203,19 +190,25 @@ class HealthLogic(HealthManager):
 
             if record.id == patient_id:
 
+                # 키와 몸무게 수정
                 record.height = height
                 record.weight = weight
 
+
                 # BMI 다시 계산
                 record.bmi = self.calculate_bmi(height, weight)
+
 
                 # 비만도 다시 계산
                 record.status = self.calculate_status(record.bmi)
 
                 print("수정 완료!")
+
                 return True
 
+
         print("해당 기록을 찾을 수 없습니다.")
+
         return False
 
 
@@ -229,9 +222,12 @@ class HealthLogic(HealthManager):
                 self.records.remove(record)
 
                 print("삭제 완료!")
+
                 return True
 
+
         print("해당 기록을 찾을 수 없습니다.")
+
         return False
 
 
@@ -241,14 +237,30 @@ class HealthLogic(HealthManager):
         if len(self.records) == 0:
             return None
 
+
+        # 전체 인원수
         total = len(self.records)
 
-        avg_height = sum(record.height for record in self.records) / total
 
-        avg_weight = sum(record.weight for record in self.records) / total
+        # 평균 키
+        avg_height = sum(
+            record.height for record in self.records
+        ) / total
 
-        avg_bmi = sum(record.bmi for record in self.records) / total
 
+        # 평균 몸무게
+        avg_weight = sum(
+            record.weight for record in self.records
+        ) / total
+
+
+        # 평균 BMI
+        avg_bmi = sum(
+            record.bmi for record in self.records
+        ) / total
+
+
+        # 통계 결과 저장
         statistics = {
             "인원수": total,
             "평균 키": round(avg_height, 2),
@@ -264,15 +276,19 @@ if __name__ == "__main__":
 
     health = HealthLogic()
 
+
     # 신규 등록
     health.create_record("홍길동", 1995, "남", 175.0, 72.5)
     health.create_record("김영희", 1998, "여", 162.0, 52.0)
 
-    # 전체 목록
+
+    # 전체 목록 조회
     print("\n===== 전체 목록 =====")
 
     for record in health.get_all_records():
+
         print(record.to_dict())
+
 
     # 검색
     print("\n===== 검색 결과 =====")
@@ -280,25 +296,31 @@ if __name__ == "__main__":
     result = health.search_record("홍길동")
 
     for record in result:
+
         print(record.to_dict())
+
 
     # 수정
     print("\n===== 수정 =====")
 
     health.update_record("P2026-0001", 180.0, 80.0)
 
+
     # 통계
     print("\n===== 통계 =====")
 
     print(health.get_statistics())
+
 
     # 삭제
     print("\n===== 삭제 =====")
 
     health.delete_record("P2026-0002")
 
-    # 삭제 후 목록
+
+    # 삭제 후 목록 조회
     print("\n===== 삭제 후 목록 =====")
 
     for record in health.get_all_records():
+
         print(record.to_dict())
