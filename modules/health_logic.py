@@ -286,7 +286,7 @@ class HealthLogic(HealthManager):
         return statistics
 
 
-# 콘솔 테스트
+# 테스트
 if __name__ == "__main__":
 
     health = HealthLogic()
@@ -294,7 +294,7 @@ if __name__ == "__main__":
 
     # 신규 등록
     health.create_record("홍길동", 1995, "남", 175.0, 72.5)
-    health.create_record("김영희", 1998, "여", 162.0, 52.0)
+    health.create_record("최민솔", 2007, "여", 182.0, 40.0)
 
 
     # 전체 목록 조회
