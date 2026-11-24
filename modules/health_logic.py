@@ -26,6 +26,11 @@ CRUD
 from modules.health_db import HealthManager, HealthRecord
 import csv
 
+# AI 사용 주석
+# AI 종류: ChatGPT (GPT-6)
+# AI 사용 목적: CSV 파일을 읽어 건강정보 데이터를 불러오는 방법을 정확히 이해하지 못하여 사용함. 특히 DictReader를 이용하여 CSV 파일의 데이터를 딕셔너리 형태로 저장하는 방법을 이해하기 위해 사용함.
+# 사용한 프롬프트: 파이썬에서 CSV 파일을 읽고 각 행의 데이터를 딕셔너리 형태로 리스트에 저장하는 방법을 알려줘.
+# 작성일: 2026-11-23
 
 class ExcelRepository:
 
@@ -93,6 +98,11 @@ class ExcelRepository:
         except Exception as e:
             print("파일 저장 오류:", e)
 
+# AI 사용 주석
+# AI 종류: ChatGPT (GPT-6)
+# AI 사용 목적: 키와 몸무게를 이용하여 BMI를 계산하고 계산된 BMI 값에 따라 비만도를 구분하는 방법을 정확히 이해하지 못하여 사용함.
+# 사용한 프롬프트: 파이썬에서 키와 몸무게를 이용해 BMI를 계산하고 BMI 수치에 따라 저체중, 정상, 과체중, 비만으로 구분하는 함수를 만들어줘.
+# 작성일: 2026-11-23
 
 class HealthLogic(HealthManager):
 
@@ -230,6 +240,11 @@ class HealthLogic(HealthManager):
 
         return False
 
+# AI 사용 주석
+# AI 종류: ChatGPT (GPT-6)
+# AI 사용 목적: 여러 건강정보 객체가 들어 있는 리스트에서 전체 인원수와 평균 키, 평균 몸무게, 평균 BMI를 계산하는 방법을 이해하기 위해 사용함. 특히 sum()과 리스트 내포를 활용하여 객체의 특정 속성들의 평균을 구하는 방법을 이해하기 위해 사용함.
+# 사용한 프롬프트: 파이썬 클래스 객체가 저장된 리스트에서 각 객체의 키, 몸무게, BMI를 가져와 평균을 계산하고 딕셔너리로 결과를 반환하는 방법을 알려줘.
+# 작성일: 2026-11-23
 
     # 통계 계산
     def get_statistics(self):
