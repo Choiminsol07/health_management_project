@@ -14,4 +14,18 @@
 from tkinter import*
 
 window = Tk()
-label = Label(window, text="bmi 건강관리 프로그램")
+window.title("BMI 건강관리 프로그램")
+window.geometry("1000x800")
+
+button = Button(
+    window,
+    font=("맑은 고딕", 35, "bold"),
+    text="bmi 건강관리 프로그램",
+    bg="black",
+    fg="white",
+    width=1000,
+    height=800,
+)
+button.pack(expand=True)
+
+window.mainloop()
