@@ -13,20 +13,10 @@
 import tkinter as tk
 from tkinter import ttk
 
-
-# -----------------------------
-# 1. 기본 윈도우 설정
-# -----------------------------
-
 root = tk.Tk()
 root.title("건강관리 프로그램")
-root.geometry("1000x900")
+root.geometry("1000x1200")
 root.configure(bg="black")
-
-
-# -----------------------------
-# 2. 색상 설정
-# -----------------------------
 
 BG = "black"
 BLUE = "steelblue4"
@@ -34,11 +24,6 @@ GREEN = "darkgreen"
 ORANGE = "chocolate4"
 WHITE = "white"
 GRAY = "gray"
-
-
-# -----------------------------
-# 3. 제목 영역
-# -----------------------------
 
 header = tk.Frame(root, bg=BLUE, height=85)
 header.pack(fill="x", padx=10, pady=10)
@@ -58,11 +43,6 @@ tk.Label(
     bg=BLUE,
     fg="lightgray"
 ).pack(anchor="w", padx=15)
-
-
-# -----------------------------
-# 4. 통계 카드 영역
-# -----------------------------
 
 stats_frame = tk.Frame(root, bg=BG)
 stats_frame.pack(fill="x", padx=10)
@@ -99,18 +79,13 @@ def create_card(parent, title, value, unit, color, bg):
 
 
 create_card(stats_frame, "등록 인원", "120", "명",
-            "dodgerblue", "gray10")
+            "dodgerblue", "gray5")
 
 create_card(stats_frame, "평균 BMI", "22.5", "",
             "mediumspringgreen", "gray5")
 
 create_card(stats_frame, "평균 체중", "65.2", "kg",
             "darkorange", "gray5")
-
-
-# -----------------------------
-# 5. 건강정보 관리 버튼
-# -----------------------------
 
 tk.Label(
     root,
@@ -148,11 +123,6 @@ create_button(menu_frame, "♙\n정보 등록", "gray10")
 create_button(menu_frame, "⌕\n정보 조회", "darkgreen")
 create_button(menu_frame, "▥\n통계 확인", "chocolate4")
 
-
-# -----------------------------
-# 6. 등록된 건강정보 영역
-# -----------------------------
-
 tk.Label(
     root,
     text="등록된 건강정보",
@@ -168,11 +138,6 @@ tk.Label(
     fg=GRAY,
     font=("맑은 고딕", 10)
 ).pack(anchor="w", padx=12)
-
-
-# -----------------------------
-# 7. Treeview 표 영역
-# -----------------------------
 
 table_frame = tk.Frame(root, bg=BG)
 table_frame.pack(fill="both", expand=True, padx=10, pady=5)
@@ -197,9 +162,6 @@ for col in columns:
     tree.heading(col, text=col)
     tree.column(col, width=130, anchor="center")
 
-
-# 예시 데이터
-
 sample_data = [
     ("P0001", "김민수", "남", 175, 70, 22.86),
     ("P0002", "이서연", "여", 162, 52, 19.81),
@@ -209,9 +171,6 @@ sample_data = [
 for data in sample_data:
     tree.insert("", "end", values=data)
 
-
-# 세로 스크롤바
-
 scroll_y = ttk.Scrollbar(
     table_frame,
     orient="vertical",
@@ -219,9 +178,6 @@ scroll_y = ttk.Scrollbar(
 )
 
 tree.configure(yscrollcommand=scroll_y.set)
-
-
-# 가로 스크롤바
 
 scroll_x = ttk.Scrollbar(
     table_frame,
@@ -237,11 +193,6 @@ scroll_x.grid(row=1, column=0, sticky="ew")
 
 table_frame.grid_rowconfigure(0, weight=1)
 table_frame.grid_columnconfigure(0, weight=1)
-
-
-# -----------------------------
-# 8. Treeview 스타일
-# -----------------------------
 
 style = ttk.Style()
 
@@ -268,11 +219,6 @@ style.map(
     background=[("selected", "steelblue4")],
     foreground=[("selected", "white")]
 )
-
-
-# -----------------------------
-# 9. 검색 및 관리 영역
-# -----------------------------
 
 tk.Label(
     root,
@@ -304,20 +250,12 @@ search_entry.pack(
 
 create_button(search_frame, "검색", BLUE)
 
-
-# 등록, 수정, 삭제 버튼
-
 manage_frame = tk.Frame(root, bg=BG)
 manage_frame.pack(fill="x", padx=10, pady=10)
 
 create_button(manage_frame, "등록", "darkgreen")
 create_button(manage_frame, "수정", "steelblue4")
 create_button(manage_frame, "삭제", "firebrick4")
-
-
-# -----------------------------
-# 10. 건강정보 입력 영역
-# -----------------------------
 
 tk.Label(
     root,
@@ -360,11 +298,6 @@ gender_entry = create_entry(form_frame, "성별")
 height_entry = create_entry(form_frame, "키(cm)")
 weight_entry = create_entry(form_frame, "몸무게(kg)")
 
-
-# -----------------------------
-# 11. 파일 형식 선택 영역
-# -----------------------------
-
 file_frame = tk.Frame(root, bg=BG)
 file_frame.pack(fill="x", padx=10, pady=10)
 
@@ -388,10 +321,5 @@ file_type.pack(side="left", padx=5)
 
 create_button(file_frame, "파일 등록", "gray20")
 create_button(file_frame, "파일 저장", "gray20")
-
-
-# -----------------------------
-# 12. GUI 실행
-# -----------------------------
 
 root.mainloop()
